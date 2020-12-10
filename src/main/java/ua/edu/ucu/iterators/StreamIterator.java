@@ -1,6 +1,7 @@
 package ua.edu.ucu.iterators;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 public class StreamIterator implements Iterator<Integer> {
     private final int[] numbers;
@@ -21,8 +22,13 @@ public class StreamIterator implements Iterator<Integer> {
 
     @Override
     public Integer next() {
-        int res = this.numbers[this.idx];
-        this.idx++;
-        return res;
+        if (this.hasNext()) {
+            int res = this.numbers[this.idx];
+            this.idx++;
+            return res;
+        }
+        else {
+            throw new NoSuchElementException();
+        }
     }
 }

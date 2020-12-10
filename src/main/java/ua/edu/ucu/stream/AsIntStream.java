@@ -22,13 +22,14 @@ public class AsIntStream implements IntStream {
     }
 
     private void checkIsEmpty() {
-        if (this.elements == null) {
+        if (!this.elements.hasNext()) {
             throw new IllegalArgumentException();
         }
     }
 
     @Override
     public Double average() {
+        this.checkIsEmpty();
         return (double) this.sum() / this.count();
     }
 
@@ -46,7 +47,6 @@ public class AsIntStream implements IntStream {
 
     @Override
     public long count() {
-        this.checkIsEmpty();
         long count = 0;
         while (this.elements.hasNext()) {
             this.elements.next();
